@@ -1,0 +1,54 @@
+public class Carte {
+	
+	private String nom="", typePokemon="", coutAttaque="", pouvoirPokemon="", niveauEvolution="", typeCarte="";
+	private int pointVie=0, degats=0, numCarte=0, numPokemon=0, niveau=0;
+	
+	public Carte(String sonNom, String sonType, String sonCout, String sonPouvoir, String sonEvolution, String sonTypeCarte,
+				 int sesPV, int sesDegats, int sonNumCarte, int sonNumPokemon, int sonNiveau)
+	{		
+		nom=sonNom;
+		typePokemon=sonType;
+		coutAttaque=sonCout;
+		pouvoirPokemon=sonPouvoir;
+		niveauEvolution=sonEvolution;
+		pointVie=sesPV;
+		degats=sesDegats;
+		numCarte=sonNumCarte;
+		numPokemon=sonNumPokemon;
+		niveau=sonNiveau;
+		typeCarte=sonTypeCarte;
+	}
+	
+	public String getNom(){ return nom; }
+	public String getType(){ return typePokemon; }
+	public String getCout(){ return coutAttaque; }
+	public String getPouvoir(){ return pouvoirPokemon; }
+	public String getEvolution(){ return niveauEvolution; }
+	public String getTypeCarte(){ return typeCarte; }
+	public int getPV(){ return pointVie; }
+	public int getDegats(){ return degats; }
+	public int getNumCarte(){ return numCarte; }
+	public int getNumPokemon(){ return numPokemon; }
+	public int getNiveau(){ return niveau; }
+	
+	public void affichePokemon()
+	{
+		if(typeCarte.equalsIgnoreCase("pokémon")==true)
+		{
+			System.out.println("Nouvelle carte "+getTypeCarte()+" ajouté:");
+			System.out.println(getTypeCarte()+" "+getNom()+", de type "+getType()+", niveau "+getNiveau()+", "+getPV()+" point de vie, "+getDegats()+" de dégâts, son numéro pokémon "+getNumPokemon()+", son numéro de carte "+getNumCarte());
+			if(getEvolution()!="")System.out.println("Il est l'évolution de "+getEvolution()+".");
+			System.out.println("Son pouvoir "+getPouvoir()+", coût des ses attaques "+getCout()+".");
+		}
+		else if(typeCarte.equalsIgnoreCase("énergie")==true)
+		{
+			System.out.println("Nouvelle carte "+getTypeCarte()+" de type "+getType()+" ajouté.");
+		}
+		else if (typeCarte.equalsIgnoreCase("dresseur")==true)
+		{
+			System.out.println("Nouvelle carte "+getTypeCarte()+" ajouté:");
+			System.out.println("Son pouvoir "+getPouvoir()+".");
+		}
+	}
+	
+}
