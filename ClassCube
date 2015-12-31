@@ -1,0 +1,199 @@
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.*;
+
+public class Cube{
+
+    private float thetaSquare;
+    private float xSquare;
+    private float ySquare;
+    private float zSquare;
+    private float deltaXsquare;
+    private float deltaYsquare;
+    private float deltaZsquare;
+    private int test=1;
+    
+    Cube(float theta, float x, float y, float z, float deltaX, float deltaY, float deltaZ)
+    {
+    	xSquare=x;
+    	ySquare=y;
+    	zSquare=z;
+    	deltaXsquare=deltaX;
+    	deltaYsquare=deltaY;
+    	deltaZsquare=deltaZ;
+    	thetaSquare=theta;
+    }
+    
+    public void draw(GLAutoDrawable dr, float rotateX, float rotateY, float rotateZ, int translate) 
+    {
+    	GL2 gl = dr.getGL().getGL2();
+    	gl.glPushMatrix();
+    	if(translate==1)gl.glTranslatef(0f, 0.4f, 0);
+    	gl.glRotatef(thetaSquare, rotateX, rotateY, rotateZ);
+        gl.glBegin(GL2.GL_QUADS);
+        
+        //face 1  
+	
+		//point1	
+        //xSquare=x ySquare=y zSquare=z
+			gl.glColor3f(0, 1, 0);
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+		//point2
+		//xSquare=deltaXsquare ySquare=y zSquare=z
+			gl.glColor3f(0, 0, 1);
+			xSquare=xSquare+deltaXsquare;
+        	gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+		//point3
+		//xSquare=deltaXsquare ySquare=deltaYsquare zSquare=z
+			gl.glColor3f(1, 0, 0);
+			ySquare=ySquare+deltaYsquare;
+        	gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+		//point4
+		//xSquare=x ySquare=deltaYsquare zSquare=z
+        	gl.glColor3f(1, 0, 1);
+    		xSquare=xSquare-deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+        //face 2
+		        
+		//point1
+		//xSquare=deltaXsquare ySquare=y zSquare=z
+    		gl.glColor3f(1, 0, 1);
+    		xSquare=xSquare+deltaXsquare; 
+    		ySquare=ySquare-deltaYsquare;
+			gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point2
+		//xSquare=deltaXsquare zSquare=deltaZsquare ySquare=y
+    		gl.glColor3f(1, 0, 0);
+	        zSquare=zSquare+deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point3
+        //xSquare=deltaXsquare ySquare=deltaYsquare zSquare=deltaZsquare
+    		gl.glColor3f(0, 1, 0);
+	        ySquare=ySquare+deltaYsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point4
+		//xSquare=deltaXsquare ySquare=deltaYsquare zSquare=z
+	        gl.glColor3f(0, 0, 1);
+	        zSquare=zSquare-deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+    
+        //face 3 
+
+		//point1
+        //xSquare=x zSquare=z ySquare=deltaYsquare
+	        gl.glColor3f(0, 0, 1);
+	        xSquare=xSquare-deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+
+		//point2
+        //xSquare=deltaXsquare ySquare=deltaYsquare zSquare=z
+    		gl.glColor3f(0, 1, 0);
+        	xSquare=xSquare+deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+
+		//point3
+        //xSquare=deltaXsquare ySquare=deltaYsquare zSquare=deltaZsquare
+    		gl.glColor3f(1, 0, 1);
+	        zSquare=zSquare+deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+
+		//point4
+        //xSquare=x ySquare=deltaYsquare zSquare=deltaZsquare
+    		gl.glColor3f(1, 0, 0);
+	        xSquare=xSquare-deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+        //face 4
+		        
+		//point1 
+        //xSquare=x ySquare=y zSquare=deltaZsquare
+    		gl.glColor3f(1, 0, 1);
+	        ySquare=ySquare-deltaYsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+        //point2
+        //xSquare=deltaXsquare zSquare=deltaZsquare ySquare=y
+    		gl.glColor3f(1, 0, 0);
+	        xSquare=xSquare+deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point3
+        //xSquare=deltaXsquare ySquare=y zSquare=z
+	        gl.glColor3f(0, 0, 1);
+	        zSquare=zSquare-deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point4
+        //xSquare=x ySquare=y zSquare=z
+    		gl.glColor3f(0, 1, 0);
+	        xSquare=xSquare-deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+        //face 5
+		        
+		//point1
+        //xSquare=x ySquare=y zSquare=deltaZsquare
+    		gl.glColor3f(1, 0, 0);
+	        zSquare=zSquare+deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+		
+		//point2
+        //xSquare=x ySquare=y zSquare=z
+	        gl.glColor3f(0, 1, 0);
+        	zSquare=zSquare-deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point3
+		//xSquare=x zSquare=z ySquare=deltaYsquare
+        	gl.glColor3f(0, 0, 1);
+	        ySquare=ySquare+deltaYsquare;
+        	gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point4
+		//xSquare=x ySquare=deltaYsquare zSquare=deltaZsquare
+		    gl.glColor3f(1, 0, 1);
+		    zSquare=zSquare+deltaZsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+        
+        //face 6
+	        
+		//point1
+		//xSquare=x ySquare=y zSquare=deltaZsquare
+			gl.glColor3f(1, 0, 1);
+		    ySquare=ySquare-deltaYsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+
+		//point2
+		//ySquare=y xSquare=deltaXsquare zSquare=deltaZsquare
+			gl.glColor3f(0, 0, 1);
+		    xSquare=xSquare+deltaXsquare;
+	        gl.glVertex3d(xSquare, ySquare, zSquare);
+		
+		//point3
+		//xSquare=deltaXsquare ySquare=deltaYsquare zSquare=deltaZsquare
+			gl.glColor3f(0, 1, 0);
+	        ySquare=ySquare+deltaYsquare;
+        	gl.glVertex3d(xSquare, ySquare, zSquare);
+
+
+		//point4
+		//xSquare=x ySquare=deltaYsquare zSquare=deltaZsquare
+			gl.glColor3f(1, 0, 0);
+	        xSquare=xSquare-deltaXsquare;
+        	gl.glVertex3d(xSquare, ySquare, zSquare);
+       
+        gl.glEnd();
+        gl.glPopMatrix();
+        
+    }
+}
+
