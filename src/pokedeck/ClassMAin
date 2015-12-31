@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main (String[] args){		
+		
+		Deck monDeck= new Deck("Deck1");
+		Scanner scNbarteAjout= new Scanner(System.in);
+		Scanner scNomSearch= new Scanner(System.in);
+		Scanner scChoixAction= new Scanner(System.in);
+		Integer nbCarteAjout=0;
+		String nomSearch="", choixAction="";
+		
+		do
+		{
+			System.out.println("Que shouaitez vous faire:");
+			System.out.println("	.Tapez 1 pour ajouter une nouvelle carte à mon deck "+monDeck.getNom()+",");
+			System.out.println("	.Tapez 2 pour afficher tout les pokémon présent dans mon deck "+monDeck.getNom()+",");
+			System.out.println("	.Tapez 3 pour rechercher un pokémon présent dans mon deck "+monDeck.getNom()+",");
+			System.out.println("	.Tapez 4 pour supprimer un pokémon présent dans mon deck "+monDeck.getNom()+",");
+			System.out.println("	.Tapez 0 pour quiter le programme de gestion du pokedeck,");
+			choixAction= scChoixAction.next();
+		
+			while(choixAction.equalsIgnoreCase("0")!=true && choixAction.equalsIgnoreCase("1")!=true && choixAction.equalsIgnoreCase("2")!=true && choixAction.equalsIgnoreCase("3")!=true)
+			{
+				System.out.println("Que shouaitez vous faire:");
+				System.out.println("	.Tapez 1 pour ajouter une nouvelle carte à mon deck "+monDeck.getNom()+",");
+				System.out.println("	.Tapez 2 pour afficher tout les pokémon présent dans mon deck "+monDeck.getNom()+",");
+				System.out.println("	.Tapez 3 pour rechercher un pokémon présent dans mon deck "+monDeck.getNom()+",");
+				System.out.println("	.Tapez 4 pour supprimer un pokémon présent dans mon deck "+monDeck.getNom()+",");
+				System.out.println("	.Tapez 0 pour quiter le programme de gestion du pokedeck,");
+				choixAction= scChoixAction.next();
+			}
+	
+			switch(choixAction)
+			{
+			case "1":
+				System.out.println("Entrer le nombre de cartes que vous souhaitez ajouter:");
+				nbCarteAjout=scNbarteAjout.nextInt();	
+				monDeck.addCartes(nbCarteAjout);
+				break;
+				
+			case "2":
+				monDeck.viewDeck();
+				break;
+				
+			case "3":
+				System.out.println("Entrer le nom du pokémon que vous souhaitez rechercher:");
+				nomSearch=scNomSearch.next();
+				monDeck.searchPokemon(nomSearch);
+				break;
+				
+			case "4":
+				System.out.println("Entrer le nom du pokémon que vous souhaitez rechercher:");
+				nomSearch=scNomSearch.next();
+				monDeck.deletePokemon(nomSearch);
+				break;
+				
+			case "0":
+				System.out.println("Trés bien au revoir!!");
+				break;	
+			}		
+			
+		}while(choixAction.equalsIgnoreCase("0")!=true);
+		scNbarteAjout.close();
+		scNomSearch.close();
+		scChoixAction.close();
+	}
+}
