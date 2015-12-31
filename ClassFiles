@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+import org.apache.commons.io.IOUtils;
+
+public class Files 
+{
+	public static void main(String[] args) throws IOException 
+	{
+		ArrayList<Character> c= new ArrayList<Character>();
+		InputStream flux= new FileInputStream("fichier.txt");
+		String contenu="", contenuReverse="";
+
+		contenu=IOUtils.toString(flux);
+		System.out.println("Contenu réel du fichier: "+contenu);
+
+		for(int i=0; i<contenu.length(); i++) c.add(contenu.charAt(i));
+
+		for(int i=0; i<c.size(); i++) contenuReverse=contenuReverse+c.get((c.size()-1)-i);
+		System.out.println("Contenu réel du fichier mais à l'envers: "+contenuReverse);
+		
+		
+	}
+
+}
