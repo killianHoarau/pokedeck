@@ -1,0 +1,66 @@
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.glu.GLU;
+
+
+public class Render3D implements GLEventListener{
+    
+	private float theta;
+    @Override
+    public void display(GLAutoDrawable dr) {
+        // TODO Auto-generated method stub
+    	GL2 gl = dr.getGL().getGL2();
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        update();
+        render(dr);
+    }
+
+    @Override
+    public void dispose(GLAutoDrawable arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void init(GLAutoDrawable dr) {
+        // TODO Auto-generated method stub
+    	GL2 gl = dr.getGL().getGL2();
+    	gl.glShadeModel(GL2.GL_SMOOTH);
+    	gl.glClearDepth(1.0f);
+    	gl.glEnable(GL2.GL_DEPTH_TEST);
+    	gl.glDepthFunc(GL2.GL_LEQUAL);
+    	gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);    	        
+    }
+
+    @Override
+    public void reshape(GLAutoDrawable dr, int arg1, int arg2, int arg3, int arg4) {
+        // TODO Auto-generated method stub
+    	GL2 gl = dr.getGL().getGL2();
+    	gl.glLoadIdentity();
+    	gl.glViewport(0, 0, arg3, arg4);
+    	gl.glMatrixMode(GL2.GL_PROJECTION);
+    	gl.glLoadIdentity();
+    	(new GLU()).gluPerspective(45.0f,(float)arg3/(float)arg4,0.1,10);
+    	gl.glLoadIdentity();
+        
+    }
+    public void update(){
+        theta += 3;
+    }
+    
+	public void render(GLAutoDrawable dr)
+	{       
+        
+        Cube cube1 = new Cube(theta, -0.25f, -0.9f, -0.7f, 0.2f, 0.2f, 0.2f);
+        cube1.draw(dr, 0f, 0f, 1f, 0);
+        
+        Cube cube2 = new Cube(theta, -0.25f, -0.25f, 0, 0.25f, 0.25f, 0.25f);
+        cube2.draw(dr, 0f, 1f, 0f, 0);        
+        
+        Cube cube3 = new Cube(theta, 0, 0.5f, 0, 0.25f, 0.25f, 0.25f);
+        cube3.draw(dr, 1f, 0f, 0f, 0);
+        
+	}
+}
