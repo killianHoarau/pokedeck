@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class bataille {
+	public static void main (String[] args){
+		
+		Scanner sc= new Scanner(System.in);	
+		int choix=0;
+		
+		Joueur J1=new Joueur("Killian");
+		Joueur J2=new Joueur("l'autre");
+		
+		J1.tirerCartes();
+		J1.gagneManche(J2);
+		
+		System.out.println("Que shouaitez vous faire:");
+		System.out.println("	.Tapez 1 pour continuer à jouer,");
+		System.out.println("	.Tapez 2 pour savoir qui à gagner la partie,");
+		choix= sc.nextInt();
+		
+		while(choix!=2 && choix!=1)
+		{
+			System.out.println("Que shouaitez vous faire:");
+			System.out.println("	.Tapez 1 pour continuer à jouer,");
+			System.out.println("	.Tapez 2 pour savoir qui à gagner la partie,");
+			choix= sc.nextInt();
+		}
+
+		if (choix==1)
+		{
+			do
+			{
+				System.out.println("Ok c'est reparti :)");
+				J1.tirerCartes();
+				J1.gagneManche(J2);
+				System.out.println("Que shouaitez vous faire:");
+				System.out.println("	.Tapez 1 pour continuer à jouer,");
+				System.out.println("	.Tapez 2 pour savoir qui à gagner la partie,");
+				choix= sc.nextInt();
+			}while(choix==1);
+		}
+
+		if(choix==2)
+		{
+			System.out.println("Comme tu veux!");
+			J1.gagnePartie(J2);
+		}
+		sc.close();
+	}
+}
