@@ -1,0 +1,95 @@
+import java.util.*;
+
+public class Joueur {
+	private Carte c1, c2;
+	private int point;
+	private String nomJoueur;
+	
+	public Joueur(String nom){
+		point=0;
+		nomJoueur=nom;
+		System.out.println("Point de depart de "+nomJoueur+": "+point);
+	}
+	
+	public void tirerCartes(){
+		String carteC1="",carteC2="";
+		Random rCoul = new Random();
+		Random rVal = new Random();
+		int valCoul=0;
+		int valale=0;
+		int valCoulOld=0;
+		int valaleOld=0;
+		String valAff="";
+		
+		valCoul =  rCoul.nextInt(4);
+		valale =  rVal.nextInt(13);
+		valCoulOld=valCoul;
+		valaleOld=valale;
+		
+		c1=new Carte(valale, valCoul);
+		
+		if(c1.getVal()>=11)
+		{
+			valAff=c1.modif(c1.getVal());
+			carteC1="Carte 1: "+valAff+" "+c1.getCoul();
+			System.out.println(carteC1);
+		}
+		else if(c1.getVal()<=10) 
+		{
+			carteC1="Carte 1: "+c1.getVal()+" "+c1.getCoul();
+			System.out.println(carteC1);
+		}
+		
+		
+		valCoul =  rCoul.nextInt(4);
+		valale =  rVal.nextInt(13);
+		while(valCoulOld==valCoul && valaleOld==valale)
+		{
+			valCoul =  rCoul.nextInt(4);
+			valale =  rVal.nextInt(13);
+		}
+		valCoulOld=valCoul;
+		valaleOld=valale;
+		
+		c2=new Carte(valale, valCoul);
+		
+		if(c2.getVal()>=11)
+		{
+			valAff=c2.modif(c2.getVal());
+			carteC2="Carte 2: "+valAff+" "+c2.getCoul();
+			System.out.println(carteC2);
+		}
+		else if(c2.getVal()<=10) 
+		{
+			carteC2="Carte 2: "+c2.getVal()+" "+c2.getCoul();
+			System.out.println(carteC2);
+		}
+	}
+	
+	public void gagneManche(Joueur j2){
+		String quiGagne;
+		quiGagne=c1.comparateur(c2);
+		System.out.println(quiGagne);
+		if (quiGagne=="C1 carte la plus haute")
+		{
+			this.point++;
+			System.out.println(this.nomJoueur+" remporte la manche donc point de "+this.nomJoueur+": "+this.point);
+			System.out.println(j2.nomJoueur+" perd la manche donc point de "+j2.nomJoueur+": "+j2.point);
+			
+		}
+		else if (quiGagne=="C2 carte la plus haute")
+		{
+			j2.point++;
+			System.out.println(j2.nomJoueur+" remporte la manche donc point de "+j2.nomJoueur+": "+j2.point);
+			System.out.println(this.nomJoueur+" perd la manche donc point de "+this.nomJoueur+": "+this.point);
+		}
+	}
+	
+	public void gagnePartie(Joueur j2)
+	{
+		if(this.point>j2.point)System.out.println("Bravo à "+this.nomJoueur+" qui remporte la partie. Désolé "+j2.nomJoueur);
+		else if(this.point<j2.point)System.out.println("Bravo à "+j2.nomJoueur+" qui remporte la partie. Désolé "+this.nomJoueur);
+		else if(this.point==j2.point)System.out.println("Pourquoi s'arréter maintenant!!! il y a égalité :/");
+	}
+	
+}
