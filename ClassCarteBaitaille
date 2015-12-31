@@ -1,0 +1,111 @@
+
+public class Carte {
+	
+	private static String couleur[]={"pique","coeur","carreau","trefle"};
+	private static int valeur[]={2,3,4,5,6,7,8,9,10,11,12,13,14};
+	private String taCoul;
+	private int taVal;
+	
+	public Carte(int v, int c){		
+		taCoul=couleur[c];
+		taVal=valeur[v];
+	}
+	
+	public String modif(int val)
+	{
+		String valModif="";
+		switch(val)
+		{
+		case 11:
+			valModif="Vallet";
+			break;
+			
+		case 12:
+			valModif="Dame";
+			break;
+			
+		case 13:
+			valModif="Roi";
+			break;
+			
+		case 14:
+			valModif="As";
+			break;
+		}
+		return valModif;
+	}
+	
+	public String getCoul(){
+		return taCoul;
+	}
+	
+	public int getVal(){
+		return taVal;
+	}
+	
+	public String comparateur(Carte c2)
+	{
+		String gagnant="";
+		
+		if(this.getVal()>c2.getVal()) gagnant= "Carte 1 carte la plus haute";
+		else if(this.getVal()<c2.getVal()) gagnant= "Carte 2 carte la plus haute";
+		else if(this.getVal()==c2.getVal())
+		{
+			if(c2.getCoul()!=this.getCoul())
+			{
+				switch(this.getCoul())
+				{
+				case "pique":
+					if(c2.getCoul()=="coeur" || c2.getCoul()=="carreau" || c2.getCoul()=="trefle") gagnant= "Carte 2 carte la plus haute";
+					else if (c2.getCoul()!="coeur" && c2.getCoul()!="carreau" && c2.getCoul()!="trefle") gagnant= "Erreur imposible de récupérer la couleur de la Carte 2";
+					break;
+					
+				case "coeur":
+					if(c2.getCoul()=="pique") gagnant= "Carte 1 carte la plus haute";
+					else if(c2.getCoul()=="carreau" || c2.getCoul()=="trefle") gagnant= "Carte 2 carte la plus haute";
+					else if (c2.getCoul()!="pique" && c2.getCoul()!="carreau" && c2.getCoul()!="trefle") gagnant= "Erreur imposible de récupérer la couleur de la Carte 2";
+					break;
+					
+				case "carreau":
+					if(c2.getCoul()=="pique" || c2.getCoul()=="coeur") gagnant= "Carte 1 carte la plus haute";
+					else if(c2.getCoul()=="trefle") gagnant= "Carte 2 carte la plus haute";
+					else if (c2.getCoul()!="pique" && c2.getCoul()!="coeur" && c2.getCoul()!="trefle") gagnant= "Erreur imposible de récupérer la couleur de la Carte 2";
+					break;
+					
+				case "trefle":
+					if(c2.getCoul()=="pique" || c2.getCoul()=="coeur" || c2.getCoul()=="carreau") gagnant= "Carte 1 carte la plus haute";
+					else if (c2.getCoul()!="pique" && c2.getCoul()!="coeur" && c2.getCoul()!="carreau") gagnant= "Erreur imposible de récupérer la couleur de la Carte 2";
+					break;
+					
+				default:
+					gagnant= "Erreur imposible de récupérer la couleur de la Carte 1";
+					break;
+				}
+			}
+			else if (c2.getCoul()==this.getCoul()) gagnant= "Erreur la couleur de la Carte 1 estCarte 1dentique à c'elle de de la Carte 2";
+		}
+		return gagnant;
+	}
+}
+//CORECTION
+/*
+public class Carte {
+	private static String couleur[]={"pique","coeur","carreau","trefle"};
+	private static String valeur[]={"2","3","4","5","6","7","8","9","10","V","D","R","A"};
+	private int taCoul;
+	private int taVal;
+	
+	public Carte(int v, int c){
+		taVal=v;
+		taCoul=c;
+	}
+	
+	public int getVal(){
+		return taVal;
+	}
+	
+	public betterThan(Carte c2){
+		return (this.taVal==c2.getVal())?2:(this.taVal>c2.getVal)
+	}
+}
+*/
