@@ -1,0 +1,154 @@
+import java.util.*;
+
+public class Deck {
+	
+	private static ArrayList<Carte> ListMonDeck= new ArrayList<Carte>();
+	private String nomDeck; 
+	
+	
+	public Deck(String nom)
+	{
+		nomDeck=nom;
+		System.out.println("Nouveau deck ,"+nomDeck+", créé.");
+	}
+	
+	public String getNom()
+	{
+		return nomDeck;
+	}
+	
+	public void addCartes (int nbCartes)
+	{
+		Scanner textEntrer= new Scanner(System.in);	
+		String nom="", typePokemon="", coutAttaque="", pouvoirPokemon="", niveauEvolution="", typeCarte="";
+		int pointVie=0, degats=0, numCarte=0, numPokemon=0, niveau=0, evolOuiNon=0, nbCrea=0;
+		System.out.println("Bienvenue dans l'ajout d'une carte au deck. Vous vous apprétez à ajouter "+nbCartes+" cartes à votre deck");
+		
+		for(nbCrea=1; nbCrea<=nbCartes; nbCrea++)
+		{
+			System.out.println("Création de la carte numéro "+nbCrea);
+			
+			System.out.println("Que shouaitez vous faire:");
+			System.out.println("	.Tapez \"pokémon\" pour ajouter une nouvelle carte pokémon");
+			System.out.println("	.Tapez \"énergie\" pour ajouter une nouvelle carte energie");
+			System.out.println("	.Tapez \"dresseur\" pour ajouter une nouvelle carte dresseur");
+			System.out.println("	.Tapez 0 pour quiter le programme de gestion du pokedeck,");
+			typeCarte=textEntrer.next();
+	
+			while(typeCarte.equalsIgnoreCase("0")!=true && typeCarte.equalsIgnoreCase("pokémon")!=true && typeCarte.equalsIgnoreCase("énergie")!=true && typeCarte.equalsIgnoreCase("dresseur")!=true)
+			{
+				System.out.println("Que shouaitez vous faire:");
+				System.out.println("	.Tapez \"pokémon\" pour ajouter une nouvelle carte pokémon");
+				System.out.println("	.Tapez \"énergie\" pour ajouter une nouvelle carte energie");
+				System.out.println("	.Tapez \"dresseur\" pour ajouter une nouvelle carte dresseur");
+				System.out.println("	.Tapez 0 pour quiter le programme de gestion du pokedeck,");
+				typeCarte=textEntrer.next();
+			}
+	
+			switch(typeCarte)
+			{
+			case "pokémon":
+					System.out.println("	.Entrer le nom du pokémon à ajouter,");
+					nom=textEntrer.next();
+					
+					System.out.println("	.Entrer le type du pokémon à ajouter,");
+					typePokemon=textEntrer.next();
+					
+					System.out.println("	.Entrer le coût d'attaque du pokémon à ajouter,");
+					coutAttaque=textEntrer.next();
+					
+					textEntrer.nextLine();
+					System.out.println("	.Entrer le pouvoir du pokémon à ajouter,");
+					pouvoirPokemon=textEntrer.nextLine();
+					
+					System.out.println("Votre pokémon est il une evolution:");
+					System.out.println("	.Entrez 1 pour oui");
+					System.out.println("ou");
+					System.out.println("	.Entrer 2 pour non");
+					evolOuiNon=textEntrer.nextInt();
+					if(evolOuiNon==1)
+					{
+						textEntrer.nextLine();
+						System.out.println("	.Entrer le l'évolution du pokémon à ajouter,");
+						niveauEvolution=textEntrer.nextLine();
+					}
+					
+					System.out.println("	.Entrer le nombre de point vie du pokémon à ajouter,");
+					pointVie=textEntrer.nextInt();
+					
+					System.out.println("	.Entrer le nombre de dégât qu'afflige le pokémon à ajouter,");
+					degats=textEntrer.nextInt();
+					
+					System.out.println("	.Entrer le numéro du pokémon à ajouter,");
+					numPokemon=textEntrer.nextInt();
+					
+					System.out.println("	.Entrer le numéro de la carte pokémon à ajouter,");
+					numCarte=textEntrer.nextInt();
+					
+					System.out.println("	.Entrer le niveau du pokémon à ajouter,");
+					niveau=textEntrer.nextInt();
+					
+					Carte newCarteP= new Carte(nom, typePokemon, coutAttaque, pouvoirPokemon, niveauEvolution, typeCarte, pointVie, degats, numCarte, numPokemon, niveau);
+					System.out.println("Votre pokémon à été correctement ajouter voici ca fiche signalétique:");
+					newCarteP.affichePokemon();
+					ListMonDeck.add(newCarteP);
+				break;
+				
+			case "énergie":
+					System.out.println("	.Entrer le type de la carte energie à ajouter,");
+					typePokemon=textEntrer.next();
+					
+					Carte newCarteE= new Carte(nom, typePokemon, coutAttaque, pouvoirPokemon, niveauEvolution, typeCarte, pointVie, degats, numCarte, numPokemon, niveau);
+					System.out.println("Votre carte energie à été correctement ajouter voici ca fiche signalétique:");
+					newCarteE.affichePokemon();
+					ListMonDeck.add(newCarteE);
+				break;
+				
+			case "dresseur":
+					System.out.println("	.Entrer le nom de la carte dresseur à ajouter,");
+					nom=textEntrer.next();
+					
+					textEntrer.nextLine();
+					System.out.println("	.Entrer le pouvoir de la carte dresseur à ajouter,");
+					pouvoirPokemon=textEntrer.nextLine();
+					
+					Carte newCarteD= new Carte(nom, typePokemon, coutAttaque, pouvoirPokemon, niveauEvolution, typeCarte, pointVie, degats, numCarte, numPokemon, niveau);
+					System.out.println("Votre carte dresseur à été correctement ajouter voici ca fiche signalétique:");
+					newCarteD.affichePokemon();
+					ListMonDeck.add(newCarteD);
+				break;
+				
+			case "0":
+				System.out.println("Trés bien au revoir!!");
+				break;	
+			}
+		}
+		textEntrer.nextLine();
+		textEntrer.close();	
+	}
+	
+	public void viewDeck()
+	{
+		for(int i=0; i<ListMonDeck.size(); i++)System.out.println("Pokémon: "+ListMonDeck.get(i).getNom()+", type: "+ListMonDeck.get(i).getType());
+	}
+	
+	public void searchPokemon(String nomSearch)
+	{
+		for(int i=0; i<ListMonDeck.size(); i++)
+		{
+			if(nomSearch.equalsIgnoreCase(ListMonDeck.get(i).getNom())==true)
+			{
+				System.out.println("Voici la fiche signaletique du pokémon recherché:");
+				ListMonDeck.get(i).affichePokemon();
+			}
+		}
+	}
+	
+	public void deletePokemon(String nomSearch)
+	{
+		for(int i=0; i<ListMonDeck.size(); i++)
+		{
+			if(nomSearch.equalsIgnoreCase(ListMonDeck.get(i).getNom())==true)	ListMonDeck.remove(i);
+		}
+	}
+}
